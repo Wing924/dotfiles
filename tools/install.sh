@@ -1,7 +1,5 @@
 #!/bin/bash
 
-BASE=${BASH_SOURCE%/*}
-
 RED="$(tput bold)$(tput setaf 1)"
 GRN="$(tput bold)$(tput setaf 2)"
 YEL="$(tput bold)$(tput setaf 3)"
@@ -62,11 +60,40 @@ pkg_install() {
 
 echo $PKG
 
-p_blu Update packages ...
-pkg_update
+prompt() {
+    while :
+    do
+        echo -n "${GRN}$*${NRM} [y/n] "
+        read yn
+        case $yn in
+            "y" "Y") return 0 ;;
+            "n" "N") return 1 ;;
+            *) echo "${RED}Please enter y/n${NRM}"
+        esac
+    done
+}
 
-p_blu Install vim zsh git ...
-pkg_install vim git zsh
+check_program() {
+    p_blu -n "Check $1 ... "
+    if which $1 >/dev/null; then
+        echo `which $1`
+    else
+        echo "${RED}Unknown$NRM"
+        exit 1
+    fi
+}
+
+if prompt "do you have root privileges?"; then
+    p_blu Update packages ...
+    pkg_update
+    
+    p_blu Install vim zsh git ...
+    pkg_install vim git zsh
+else
+    check_program vim
+    check_program zsh
+    check_program git
+fi
 
 p_blu Install dotfiles
 git clone https://github.com/Wing924/dotfiles.git ~/.dotfiles
@@ -86,3 +113,6 @@ p_blu Install NeoBundle ...
 mkdir -p ~/.vim/bundle
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
+p_blu change to zsh
+chsh -s `which zsh`
+p_blu "DONE"
