@@ -102,7 +102,7 @@ if [ -f ~/.zshrc ]; then
 fi
 ln -sf ~/.dotfiles/templates/zshrc ~/.zshrc
 if [ ! -f ~/.zshenv ]; then
-    echo "# Please put your custom env here\n" > ~/.zshenv
+    echo "# Please put your custom env here" > ~/.zshenv
 fi
 if [ -f ~/.vimrc ]; then
     mv ~/.vimrc ~/.vimrc.pre-dotfile
@@ -116,3 +116,4 @@ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 p_blu change to zsh
 chsh -s `which zsh`
 p_blu "DONE"
+zsh
