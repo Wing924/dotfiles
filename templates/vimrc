@@ -1,0 +1,91 @@
+set termencoding=utf-8
+
+set fileformats=unix,dos,mac
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
+
+set number
+set expandtab 
+set shiftwidth=4 
+set softtabstop=4
+set autoindent
+set smartindent
+set mouse=nv
+set cursorline
+set hlsearch
+set incsearch
+syntax on
+
+set t_Co=256
+hi CursorLine cterm=NONE ctermbg=234
+
+if has("autocmd")
+    autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+endif
+
+noremap ; :
+noremap : ;
+noremap /  /\v
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap <silent> <C-L> :noh<C-L><CR>
+
+set pastetoggle=<F10>
+
+set laststatus=2
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+
+if &diff
+    set diffopt+=iwhite
+    hi DiffAdd    ctermfg=black ctermbg=2
+    hi DiffChange ctermfg=black ctermbg=3
+    hi DiffDelete ctermfg=black ctermbg=6
+    hi DiffText   ctermfg=black ctermbg=7
+endif
+
+if 0 | endif
+
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath^=~/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/context_filetype.vim'
+
+" toogle comment plugin
+NeoBundle "tyru/caw.vim.git"
+nmap <C-_> <Plug>(caw:hatpos:toggle)
+vmap <C-_> <Plug>(caw:hatpos:toggle)
+
+" show file directories tree
+NeoBundle 'scrooloose/nerdtree'
+nnoremap <silent><C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
