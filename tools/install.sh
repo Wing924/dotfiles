@@ -66,8 +66,8 @@ prompt() {
         echo -n "${GRN}$*${NRM} [y/n] "
         read yn
         case $yn in
-            "y" "Y") return 0 ;;
-            "n" "N") return 1 ;;
+            "y", "Y") return 0 ;;
+            "n", "N") return 1 ;;
             *) echo "${RED}Please enter y/n${NRM}"
         esac
     done
