@@ -102,7 +102,7 @@ if [ -f ~/.zshrc ]; then
 fi
 ln -sf ~/.dotfiles/templates/zshrc ~/.zshrc
 if [ ! -f ~/.zshenv ]; then
-    echo "# Please put your custom env here" > ~/.zshenv
+    echo "# Please put your custom env here\n" > ~/.zshenv
 fi
 if [ -f ~/.vimrc ]; then
     mv ~/.vimrc ~/.vimrc.pre-dotfile
