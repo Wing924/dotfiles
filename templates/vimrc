@@ -35,7 +35,7 @@ nnoremap n nzz
 nnoremap N Nzz
 nnoremap <silent> <C-L> :noh<C-L><CR>
 
-set pastetoggle=<F10>
+set pastetoggle=<F9>
 
 set laststatus=2
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
