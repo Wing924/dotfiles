@@ -137,9 +137,11 @@ else
     p_blu NeoBundle already exists.
 fi
 
-if hash chsh 2>/dev/null; then
-    p_blu change to zsh
-    chsh -s `which zsh`
+if [[ "$SHELL" =~ ".*/zsh" ]]; then
+    if hash chsh 2>/dev/null; then
+        p_blu change to zsh
+        chsh -s `which zsh`
+    fi
 fi
 p_blu "DONE"
 zsh
