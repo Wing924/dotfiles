@@ -24,6 +24,9 @@ set wildmenu wildmode=list:full
 set t_Co=256
 hi CursorLine cterm=NONE ctermbg=234
 hi Visual term=reverse cterm=reverse
+hi Pmenu ctermbg=darkgray ctermfg=lightgray
+hi PmenuSel ctermbg=darkblue ctermfg=yellow
+hi PmenuSbar ctermbg=darkred
 
 if has("autocmd")
     autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
@@ -43,9 +46,9 @@ nnoremap N Nzz
 nnoremap <silent> <C-L> :noh<C-L><CR>
 
 inoremap <C-e> <Esc>$a
-inoremap <C-a> <Esc>^a
+inoremap <C-a> <Esc>^i
 noremap <C-e> <Esc>$a
-noremap <C-a> <Esc>^a
+noremap <C-a> <Esc>^i
 
 set pastetoggle=<F9>
 
@@ -96,6 +99,23 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 NeoBundle "Yggdroot/indentLine"
 let g:indentLine_color_term = 239
 
+NeoBundle 'Shougo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  " return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 call neobundle#end()
 
