@@ -42,7 +42,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git knife rails)
 
 # User configuration
 
@@ -58,3 +58,4 @@ export EDITOR=vim
 export LANG=en_US.UTF-8
 
 source ~/.zshenv
+
