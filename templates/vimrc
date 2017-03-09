@@ -20,6 +20,11 @@ set hlsearch
 set incsearch
 set title
 set wildmenu wildmode=list:full
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 set t_Co=256
 hi CursorLine cterm=NONE ctermbg=234
@@ -64,6 +69,7 @@ if &diff
     hi DiffText   ctermfg=black ctermbg=7
 endif
 
+
 if 0 | endif
 
 if &compatible
@@ -99,6 +105,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " visually displaying indent levels in code
 NeoBundle "Yggdroot/indentLine"
 let g:indentLine_color_term = 239
+let g:indentLine_conceallevel = 0
 
 NeoBundle 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
