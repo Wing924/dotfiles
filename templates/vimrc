@@ -27,7 +27,9 @@ hi Visual term=reverse cterm=reverse
 hi Pmenu ctermbg=darkgray ctermfg=lightgray
 hi PmenuSel ctermbg=darkblue ctermfg=yellow
 hi PmenuSbar ctermbg=darkred
+hi Comment ctermfg=darkgreen
 
+au BufNewFile,BufRead *.jbuilder set filetype=ruby
 if has("autocmd")
     autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
     autocmd Filetype html setlocal ts=2 sw=2 expandtab
@@ -63,6 +65,7 @@ if &diff
     hi DiffDelete ctermfg=black ctermbg=6
     hi DiffText   ctermfg=black ctermbg=7
 endif
+
 
 if 0 | endif
 
